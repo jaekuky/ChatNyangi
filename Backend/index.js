@@ -24,6 +24,11 @@ app.use(express.urlencoded({ extended: true })); // for parsing application/x-ww
 
 // POST 요청을 받았을 때 처리할 함수
 app.post("/fortuneTell", async function (req, res) {
+  // 프론트엔드에서 보낸 메시지 출력
+  let { userMessages, assistantMessages } = req.body;
+  console.log(userMessages);
+  console.log(assistantMessages);
+
   const completion = await openai.chat.completions.create({
     messages: [
       {
@@ -50,7 +55,6 @@ app.post("/fortuneTell", async function (req, res) {
   });
 
   let fortune = completion.choices[0].message["content"];
-  console.log(fortune);
   res.json({ assistant: fortune });
 });
 

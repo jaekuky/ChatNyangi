@@ -1,3 +1,7 @@
+// 변수 추가
+let userMessages = []; // 사용자가 입력한 메시지를 저장할 배열
+let assistantMessages = []; // ChatGPT의 응답(운세)을 저장할 배열
+
 // 프론트엔드에서 백엔드 서버로 요청을 보내고, ChatGPT응답을 가져오는 함수
 async function sendFortuneRequest() {
   try {
@@ -6,7 +10,11 @@ async function sendFortuneRequest() {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({}), // You can send any data here if needed
+      body: JSON.stringify({
+        // 누적된 채팅 데이터를 송수신하기
+        userMessages: userMessages,
+        assistantMessages: assistantMessages,
+      }), // You can send any data here if needed
     });
 
     if (!response.ok) {
@@ -49,6 +57,9 @@ async function sendMessage() {
   // 채팅 컨테이너에 사용자 메시지 추가
   appendMessage(userMessage, true);
 
+  // userMessages에 사용자 메시지 저장
+  userMessages.push(userMessage);
+
   // 메시지 입력 창을 비움
   input.value = "";
 
@@ -59,6 +70,9 @@ async function sendMessage() {
 
     // 채팅 컨테이너에 백엔드 서버(ChatGPT)의 응답 (운세)를 추가
     appendMessage(fortune, false);
+
+    // assistantMessages에 ChatGPT의 응답(운세)을 저장
+    assistantMessages.push(fortune);
   } catch (error) {
     console.log("Failed to get fortune : ", error);
 
