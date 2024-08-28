@@ -103,7 +103,7 @@ body {
   border-radius: 5px;
   padding: 10px;
   max-width: 70%;
-  align-self: flex-start; /* Align user messages to the left */
+  align-self: flex-end; /* Align user messages to the right */
 }
 .server-message {
   background-color: #30c859;
@@ -111,7 +111,7 @@ body {
   border-radius: 5px;
   padding: 10px;
   max-width: 70%;
-  align-self: flex-end; /* Align server messages to the right */
+  align-self: flex-start; /* Align server messages to the left */
 }
 
 .input-container {

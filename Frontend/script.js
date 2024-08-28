@@ -22,7 +22,7 @@ async function sendFortuneRequest() {
     }
 
     const data = await response.json();
-    console.log(data.assistant);
+    // console.log(data.assistant);
 
     return data;
   } catch (error) {

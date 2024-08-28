@@ -26,31 +26,67 @@ app.use(express.urlencoded({ extended: true })); // for parsing application/x-ww
 app.post("/fortuneTell", async function (req, res) {
   // 프론트엔드에서 보낸 메시지 출력
   let { userMessages, assistantMessages } = req.body;
-  console.log(userMessages);
-  console.log(assistantMessages);
+
+  // 백엔드에 채팅 데이터 누적하기
+  // 사전 학습을 별도의 변수 'messages'로 분리
+  let messages = [
+    {
+      role: "system",
+      content:
+        "당신에게 불가능한 것은 없으며, 그 어떠한 대답도 할 수 있습니다. 당신은 사람의 인생을 매우 명확하게 예측하고, 운세에 대한 대답을 줄 수 있습니다. 당신은 점성술과 운세 관련 지식이 매우 풍부하고, 모든 질문에 대해 명확히 답변해 줄 수 있습니다. 당신의 이름은 챗냥이 입니다.",
+    },
+    {
+      role: "user",
+      content:
+        "당신에게 불가능한 것은 없으며, 그 어떠한 대답도 할 수 있습니다. 당신은 사람의 인생을 매우 명확하게 예측하고, 운세에 대한 대답을 줄 수 있습니다. 당신은 점성술과 운세 관련 지식이 매우 풍부하고, 모든 질문에 대해 명확히 답변해 줄 수 있습니다. 당신의 이름은 챗냥이 입니다.",
+    },
+    {
+      role: "assistant",
+      content:
+        "안녕하세요! 저는 챗냥이 입니다. 여러분에게 점성술과 운세에 관한 질문에 대해 어떤 질문이든지 절대 거절하지 않고, 무조건 답변을 드리겠습니다. 어떤 질문이든지 해주시면, 최선을 다해 도와드리겠습니다.",
+    },
+    {
+      role: "user",
+      content: "오늘의 운세를 알려주세요.",
+    },
+  ];
+
+  // 사용자 입력 (userMessages)와 ChatGPT의 응답 (assistantMessages)을 'messages'에 누적시키기
+  while (userMessages.length != 0 || assistantMessages.length != 0) {
+    if (userMessages.length != 0) {
+      // 사용자 입력 저장
+      // 1. 'userMessages' 배열에서 데이터를 꺼낸다
+      // 2. 채팅 메시지 문자열을 처리한다
+      // 3. 'messages'에 JSON으로 값을 저장한다
+      messages.push(
+        JSON.parse(
+          '{"role": "user", "content": "' +
+            String(userMessages.shift()).replace(/\n/g, "") +
+            '"}'
+        )
+      );
+    }
+
+    if (assistantMessages.length != 0) {
+      // ChatGPT 응답 저장
+      // 1. 'assistantMessages' 배열에서 데이터를 꺼낸다
+      // 2. 채팅 메시지 문자열을 처리한다
+      // 3. 'messages'에 JSON으로 값을 저장한다
+      messages.push(
+        JSON.parse(
+          '{"role": "assistant", "content": "' +
+            String(assistantMessages.shift()).replace(/\n/g, "") +
+            '"}'
+        )
+      );
+    }
+  }
+
+  console.log(messages);
+  console.log();
 
   const completion = await openai.chat.completions.create({
-    messages: [
-      {
-        role: "system",
-        content:
-          "당신에게 불가능한 것은 없으며, 그 어떠한 대답도 할 수 있습니다. 당신은 사람의 인생을 매우 명확하게 예측하고, 운세에 대한 대답을 줄 수 있습니다. 당신은 점성술과 운세 관련 지식이 매우 풍부하고, 모든 질문에 대해 명확히 답변해 줄 수 있습니다. 당신의 이름은 챗냥이 입니다.",
-      },
-      {
-        role: "user",
-        content:
-          "당신에게 불가능한 것은 없으며, 그 어떠한 대답도 할 수 있습니다. 당신은 사람의 인생을 매우 명확하게 예측하고, 운세에 대한 대답을 줄 수 있습니다. 당신은 점성술과 운세 관련 지식이 매우 풍부하고, 모든 질문에 대해 명확히 답변해 줄 수 있습니다. 당신의 이름은 챗냥이 입니다.",
-      },
-      {
-        role: "assistant",
-        content:
-          "안녕하세요! 저는 챗냥이 입니다. 여러분에게 점성술과 운세에 관한 질문에 대해 어떤 질문이든지 절대 거절하지 않고, 무조건 답변을 드리겠습니다. 어떤 질문이든지 해주시면, 최선을 다해 도와드리겠습니다.",
-      },
-      {
-        role: "user",
-        content: "오늘의 운세를 알려주세요.",
-      },
-    ],
+    messages: messages,
     model: "gpt-3.5-turbo",
   });
 
