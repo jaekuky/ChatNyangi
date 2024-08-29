@@ -1,6 +1,24 @@
 // 변수 추가
 let userMessages = []; // 사용자가 입력한 메시지를 저장할 배열
 let assistantMessages = []; // ChatGPT의 응답(운세)을 저장할 배열
+let myDateTime = ""; // 사용자의 생년월일, 태어난 시간을 저장할 변수
+
+// 사용자가 입력한 생년월일, 태어난 시간을 가져오는 함수
+function getMyDateTime() {
+  const date = document.getElementById("date").value;
+  const time = document.getElementById("hour").value;
+
+  if (date === "") {
+    alert("생년월일을 입력해 주세요.");
+    return;
+  }
+
+  myDateTime = date + time;
+
+  // "intro-container"를 숨기고, "chat-container"를 화면에 표시함
+  document.getElementById("intro").style.display = "none";
+  document.getElementById("chat").style.display = "block";
+}
 
 // 프론트엔드에서 백엔드 서버로 요청을 보내고, ChatGPT응답을 가져오는 함수
 async function sendFortuneRequest() {
@@ -11,6 +29,8 @@ async function sendFortuneRequest() {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
+        // '생년월일', '태어난 시간'을 백엔드에 전송하기
+        myDateTime: myDateTime,
         // 누적된 채팅 데이터를 송수신하기
         userMessages: userMessages,
         assistantMessages: assistantMessages,

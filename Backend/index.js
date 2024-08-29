@@ -25,6 +25,7 @@ app.use(express.urlencoded({ extended: true })); // for parsing application/x-ww
 // POST 요청을 받았을 때 처리할 함수
 app.post("/fortuneTell", async function (req, res) {
   // 프론트엔드에서 보낸 메시지 출력
+  console.log(req.body);
   let { userMessages, assistantMessages } = req.body;
 
   // 백엔드에 채팅 데이터 누적하기
