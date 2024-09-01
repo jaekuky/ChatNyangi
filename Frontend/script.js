@@ -63,6 +63,9 @@ function appendMessage(message, isUser) {
 }
 
 async function sendMessage() {
+  // 'loading-icon' 보여주기
+  document.getElementById("loading-icon").style.display = "block";
+
   // 사용자가 압력한 요청을 가져옴
   const input = document.getElementById("messageInput");
   const userMessage = input.value.trim();
@@ -101,4 +104,6 @@ async function sendMessage() {
       false
     );
   }
+  // 'loading-icon' 숨기기
+  document.getElementById("loading-icon").style.display = "none";
 }

@@ -3,8 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- favicon 추가 -->
     <link rel="icon" href="./image/favicon.png" type="image/x-icon" />
     <title>운세 보는 챗냥이</title>
+    <!-- 'font-awesome' 아이콘 가져오기: 'font-awesome' CDN URL 지정 -->
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
@@ -58,8 +60,11 @@
       <div class="messages" id="messages">
         <!-- Messages will be displayed here -->
       </div>
-      <div id="loading-icon" class="loading-icon" style="display: none">
-        <i class="fas fa-spinner fa-spin"></i>
+      // 'font-awesome'에서 가져온 'loading-icon' 삽입하기
+      <div id="loader">
+        <div id="loading-icon" class="loading-icon" style="display: none">
+          <i class="fas fa-spinner fa-spin"></i>
+        </div>
       </div>
       <div class="input-container">
         <input

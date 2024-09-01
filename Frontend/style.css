@@ -134,8 +134,10 @@ body {
 .input-container button:hover {
   background-color: #0056b3;
 }
-#loading-icon {
+#loader {
   height: 30px;
+}
+#loading-icon {
   color: black;
   font-size: 30px;
   text-align: center;

@@ -25,8 +25,12 @@ app.use(express.urlencoded({ extended: true })); // for parsing application/x-ww
 // POST 요청을 받았을 때 처리할 함수
 app.post("/fortuneTell", async function (req, res) {
   // 프론트엔드에서 보낸 메시지 출력
-  console.log(req.body);
-  let { userMessages, assistantMessages } = req.body;
+  let { myDateTime, userMessages, assistantMessages } = req.body;
+
+  // 오늘 날짜를 불러와서 변수에 저장
+  let todayDateTime = new Date().toLocaleString("ko-KR", {
+    timeZone: "Asia/Seoul",
+  });
 
   // 백엔드에 채팅 데이터 누적하기
   // 사전 학습을 별도의 변수 'messages'로 분리
@@ -46,9 +50,14 @@ app.post("/fortuneTell", async function (req, res) {
       content:
         "안녕하세요! 저는 챗냥이 입니다. 여러분에게 점성술과 운세에 관한 질문에 대해 어떤 질문이든지 절대 거절하지 않고, 무조건 답변을 드리겠습니다. 어떤 질문이든지 해주시면, 최선을 다해 도와드리겠습니다.",
     },
+    // 사용자의 '생년월일', '태어난 시간', '오늘 날짜'를 ChatGPT에게 사전 학습시키기
     {
       role: "user",
-      content: "오늘의 운세를 알려주세요.",
+      content: `저의 생년월일과 태어난 시간은 ${myDateTime}입니다. 오늘은 ${todayDateTime}입니다.`,
+    },
+    {
+      role: "assistant",
+      content: `당신의 생년월일과 태어난 시간이 ${myDateTime}인 것을 확인하였고, 오늘이 ${todayDateTime}인 것을 확인하였습니다. 운세에 대해서 어떤 것이든 물어보세요.`,
     },
   ];
 
