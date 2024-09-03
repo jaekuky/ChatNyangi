@@ -42,7 +42,6 @@ async function sendFortuneRequest() {
     }
 
     const data = await response.json();
-    // console.log(data.assistant);
 
     return data;
   } catch (error) {
@@ -52,14 +51,19 @@ async function sendFortuneRequest() {
 
 // 'messageBubble'에 사용자 입력 또는 백엔드 응답 표시
 function appendMessage(message, isUser) {
-  const messageBuble = document.createElement("div");
-  messageBuble.classList.add("message");
-  messageBuble.classList.add(isUser ? "user-message" : "server-message");
-  messageBuble.textContent = message;
+  const messageBubble = document.createElement("div");
+  messageBubble.classList.add("message");
+  messageBubble.classList.add(isUser ? "user-message" : "server-message");
+  messageBubble.textContent = message;
 
   // 'messageContainer'에 messageBubble 추가
   const messageContainer = document.getElementById("messages");
-  messageContainer.appendChild(messageBuble);
+  messageContainer.appendChild(messageBubble);
+
+  // 'messageContainer' 스크롤바 위치 수정
+  let maxScrollHeight =
+    messageContainer.scrollHeight - messageContainer.clientLeft;
+  messageContainer.scrollTop = maxScrollHeight;
 }
 
 async function sendMessage() {
