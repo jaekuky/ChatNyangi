@@ -9,14 +9,25 @@ const openai = new OpenAI({
   apiKey: `${chatGPT_API_Key}`,
 });
 
+// serverless-http 설정
+// serverless-http 패키지 불러옴
+const serverless = require("serverless-http");
+
 // Express 설정
 const express = require("express");
 // CORS 설정
 const cors = require("cors");
 // Express 객체 생성
 const app = express();
-// CORS 미들웨어 추가 (기본 설정)
-app.use(cors());
+
+// CORS 문제 해결
+// app.use(cors());
+// 백엔드가 챗냥이의 프론트엔드의 요청만 수락하도록 수정
+let corsOptions = {
+  origin: "https://chatnyangi-jaekuky.pages.dev",
+  credentials: true,
+};
+app.use(cors(corsOptions));
 
 // POST 요청을 받을 수 있게 만듦
 app.use(express.json()); // for parsing application/json
@@ -101,4 +112,6 @@ app.post("/fortuneTell", async function (req, res) {
   res.json({ assistant: fortune });
 });
 
-app.listen(3000);
+// express()함수로 생성했던 app을 serverless()로 감싸서 AWS Lambda로 실행 가능하도록 만듦
+module.exports.handler = serverless(app);
+// app.listen(3000);

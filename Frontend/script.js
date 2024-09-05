@@ -23,19 +23,22 @@ function getMyDateTime() {
 // 프론트엔드에서 백엔드 서버로 요청을 보내고, ChatGPT응답을 가져오는 함수
 async function sendFortuneRequest() {
   try {
-    const response = await fetch("http://localhost:3000/fortuneTell", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        // '생년월일', '태어난 시간'을 백엔드에 전송하기
-        myDateTime: myDateTime,
-        // 누적된 채팅 데이터를 송수신하기
-        userMessages: userMessages,
-        assistantMessages: assistantMessages,
-      }), // You can send any data here if needed
-    });
+    const response = await fetch(
+      "https://4pelyvd42spbcvytt3kgxvkffu0jlxlm.lambda-url.ap-northeast-2.on.aws/fortuneTell",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          // '생년월일', '태어난 시간'을 백엔드에 전송하기
+          myDateTime: myDateTime,
+          // 누적된 채팅 데이터를 송수신하기
+          userMessages: userMessages,
+          assistantMessages: assistantMessages,
+        }), // You can send any data here if needed
+      }
+    );
 
     if (!response.ok) {
       throw new Error("Network response was not ok " + response.statusText);
