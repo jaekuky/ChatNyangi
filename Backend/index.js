@@ -10,7 +10,6 @@ const openai = new OpenAI({
 });
 
 // serverless-http 설정
-// serverless-http 패키지 불러옴
 const serverless = require("serverless-http");
 
 // Express 설정
@@ -21,13 +20,14 @@ const cors = require("cors");
 const app = express();
 
 // CORS 문제 해결
-// app.use(cors());
-// 백엔드가 챗냥이의 프론트엔드의 요청만 수락하도록 수정
-let corsOptions = {
-  origin: "https://chatnyangi-jaekuky.pages.dev",
-  credentials: true,
-};
-app.use(cors(corsOptions));
+// 수정된 부분 시작: cors 미들웨어 사용
+app.use(
+  cors({
+    origin: "https://chatnyangi-jaekuky.pages.dev", // 프론트엔드 도메인 허용
+    credentials: true,
+  })
+);
+// 수정된 부분 끝
 
 // POST 요청을 받을 수 있게 만듦
 app.use(express.json()); // for parsing application/json
@@ -44,7 +44,6 @@ app.post("/fortuneTell", async function (req, res) {
   });
 
   // 백엔드에 채팅 데이터 누적하기
-  // 사전 학습을 별도의 변수 'messages'로 분리
   let messages = [
     {
       role: "system",
@@ -73,45 +72,36 @@ app.post("/fortuneTell", async function (req, res) {
   ];
 
   // 사용자 입력 (userMessages)와 ChatGPT의 응답 (assistantMessages)을 'messages'에 누적시키기
-  while (userMessages.length != 0 || assistantMessages.length != 0) {
-    if (userMessages.length != 0) {
-      // 사용자 입력 저장
-      // 1. 'userMessages' 배열에서 데이터를 꺼낸다
-      // 2. 채팅 메시지 문자열을 처리한다
-      // 3. 'messages'에 JSON으로 값을 저장한다
-      messages.push(
-        JSON.parse(
-          '{"role": "user", "content": "' +
-            String(userMessages.shift()).replace(/\n/g, "") +
-            '"}'
-        )
-      );
+  while (userMessages.length !== 0 || assistantMessages.length !== 0) {
+    if (userMessages.length !== 0) {
+      messages.push({
+        role: "user",
+        content: String(userMessages.shift()).replace(/\n/g, ""),
+      });
     }
 
-    if (assistantMessages.length != 0) {
-      // ChatGPT 응답 저장
-      // 1. 'assistantMessages' 배열에서 데이터를 꺼낸다
-      // 2. 채팅 메시지 문자열을 처리한다
-      // 3. 'messages'에 JSON으로 값을 저장한다
-      messages.push(
-        JSON.parse(
-          '{"role": "assistant", "content": "' +
-            String(assistantMessages.shift()).replace(/\n/g, "") +
-            '"}'
-        )
-      );
+    if (assistantMessages.length !== 0) {
+      messages.push({
+        role: "assistant",
+        content: String(assistantMessages.shift()).replace(/\n/g, ""),
+      });
     }
   }
 
-  const completion = await openai.chat.completions.create({
-    messages: messages,
-    model: "gpt-3.5-turbo",
-  });
+  try {
+    const completion = await openai.chat.completions.create({
+      messages: messages,
+      model: "gpt-3.5-turbo",
+    });
 
-  let fortune = completion.choices[0].message["content"];
-  res.json({ assistant: fortune });
+    let fortune = completion.choices[0].message["content"];
+
+    res.json({ assistant: fortune });
+  } catch (error) {
+    console.error("Error calling OpenAI API:", error);
+    res.status(500).json({ error: "Failed to get response from OpenAI API" });
+  }
 });
 
 // express()함수로 생성했던 app을 serverless()로 감싸서 AWS Lambda로 실행 가능하도록 만듦
 module.exports.handler = serverless(app);
-// app.listen(3000);

@@ -24,12 +24,15 @@ function getMyDateTime() {
 async function sendFortuneRequest() {
   try {
     const response = await fetch(
-      "https://4pelyvd42spbcvytt3kgxvkffu0jlxlm.lambda-url.ap-northeast-2.on.aws/fortuneTell",
+      "https://tihppl34ypxjpwvxyo6qegxxoa0yulbt.lambda-url.ap-northeast-2.on.aws/fortuneTell",
       {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
+        // Ensure 'mode' is 'cors' and 'credentials' is 'include'
+        mode: "cors", // Ensure CORS mode is used
+        credentials: "include", // Include credentials in the request
         body: JSON.stringify({
           // '생년월일', '태어난 시간'을 백엔드에 전송하기
           myDateTime: myDateTime,
@@ -78,9 +81,11 @@ async function sendMessage() {
   const userMessage = input.value.trim();
   if (userMessage === "") {
     appendMessage(
-      "아무런 내용도 입력하지 않으셨습니다. 챗냥이에게 물어보실 내용을 입력해주세요.",
+      "아무런 내용도 입력하지 않으셨습니다. 챗냥이에게 물어볼 내용을 입력해주세요.",
       false
     );
+    // 'loading-icon' 숨기기
+    document.getElementById("loading-icon").style.display = "none";
     return;
   }
 
