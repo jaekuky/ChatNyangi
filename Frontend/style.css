@@ -7,13 +7,17 @@
 
 body {
   background-color: rgb(24, 25, 55); /* Background color */
-  /*color: rgb(24, 25, 55); /* Text color */
   color: #fff; /* Text color */
   font-family: Arial, sans-serif;
   display: flex;
   justify-content: center;
   align-items: flex-start;
   height: 100vh;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
 }
 
 .intro-container {
@@ -25,14 +29,14 @@ body {
   align-items: center;
 }
 .intro-container h1 {
-  font-size: 2.5rem;
+  font-size: 2rem;
   margin-bottom: 15px;
 }
 .img-box {
   margin-bottom: 15px;
 }
 .img-box img {
-  width: 85%;
+  width: 70%;
   min-width: 300px;
   object-fit: cover;
 }
@@ -144,6 +148,15 @@ body {
   text-align: center;
 }
 
+.kakao-ad {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 15px;
+  min-width: 350px;
+  min-height: 150px;
+}
+
 /* Responsive design */
 @media screen and (max-width: 400px) {
   .intro-container h1 {
@@ -161,6 +174,10 @@ body {
   }
   .messages {
     height: 88% - 30px; /* Adjust height for smaller screens */
+  }
+
+  .kakao-ad {
+    margin-top: 5px;
   }
 }
 
