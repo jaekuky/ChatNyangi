@@ -20,14 +20,13 @@ const cors = require("cors");
 const app = express();
 
 // CORS 문제 해결
-// 수정된 부분 시작: cors 미들웨어 사용
+// cors 미들웨어 사용
 app.use(
   cors({
     origin: "https://chatnyangi-jaekuky.pages.dev", // 프론트엔드 도메인 허용
     credentials: true,
   })
 );
-// 수정된 부분 끝
 
 // POST 요청을 받을 수 있게 만듦
 app.use(express.json()); // for parsing application/json
@@ -88,19 +87,29 @@ app.post("/fortuneTell", async function (req, res) {
     }
   }
 
-  try {
-    const completion = await openai.chat.completions.create({
-      messages: messages,
-      model: "gpt-3.5-turbo",
-    });
+  // ChatGPT에 접속 실패했을 때, 재접속하기
+  const maxRetries = 3;
+  let retries = 0;
+  let completion;
 
-    let fortune = completion.choices[0].message["content"];
-
-    res.json({ assistant: fortune });
-  } catch (error) {
-    console.error("Error calling OpenAI API:", error);
-    res.status(500).json({ error: "Failed to get response from OpenAI API" });
+  while (retries < maxRetries) {
+    try {
+      completion = await openai.chat.completions.create({
+        messages: messages,
+        model: "gpt-3.5-turbo",
+      });
+      break;
+    } catch (error) {
+      retries++;
+      console.error("Error fetching data, retrying (${retries}/${maxRetries}");
+      console.error("Error calling OpenAI API:", error);
+      res.status(500).json({ error: "Failed to get response from OpenAI API" });
+    }
   }
+
+  let fortune = completion.choices[0].message["content"];
+
+  res.json({ assistant: fortune });
 });
 
 // express()함수로 생성했던 app을 serverless()로 감싸서 AWS Lambda로 실행 가능하도록 만듦
