@@ -2,6 +2,7 @@
 let userMessages = []; // 사용자가 입력한 메시지를 저장할 배열
 let assistantMessages = []; // ChatGPT의 응답(운세)을 저장할 배열
 let myDateTime = ""; // 사용자의 생년월일, 태어난 시간을 저장할 변수
+let fortuneMessageCounter = 0; // ChatGPT의 응답(운세) 메시지 개수
 
 // 사용자가 입력한 생년월일, 태어난 시간을 가져오는 함수
 function getMyDateTime() {
@@ -60,7 +61,24 @@ function appendMessage(message, isUser) {
   const messageBubble = document.createElement("div");
   messageBubble.classList.add("message");
   messageBubble.classList.add(isUser ? "user-message" : "server-message");
-  messageBubble.textContent = message;
+
+  // 메시지 내용을 담을 요소 생성
+  const messageContent = document.createElement("p");
+  messageContent.textContent = message;
+  messageBubble.appendChild(messageContent);
+
+  // 두번째 운세 메시지부터, 메시지 끝에 '복채 보내기' 추가하기
+  if (isUser == false && fortuneMessageCounter >= 2) {
+    const extraMessage = document.createElement("p");
+    extraMessage.innerHTML =
+      "\n추가로 링크를 눌러 작은 온정을 베풀어 주시면, 더욱 좋은 운이 있으실 겁니다. => ";
+    const link = document.createElement("a");
+    link.href = "https://buymeacoffee.com/jakukyr";
+    link.textContent = "복채 보내기";
+    link.target = "_blank";
+    extraMessage.appendChild(link);
+    messageBubble.appendChild(extraMessage);
+  }
 
   // 'messageContainer'에 messageBubble 추가
   const messageContainer = document.getElementById("messages");
@@ -102,6 +120,9 @@ async function sendMessage() {
     // 백엔드 서버에 요청을 보내고, 운세를 가져옴
     const serverResponse = await sendFortuneRequest();
     const fortune = serverResponse["assistant"];
+
+    // 운세 메시지를 가져오는데 성공했으면, 카운터 증가
+    fortuneMessageCounter++;
 
     // 채팅 컨테이너에 백엔드 서버(ChatGPT)의 응답 (운세)를 추가
     appendMessage(fortune, false);
