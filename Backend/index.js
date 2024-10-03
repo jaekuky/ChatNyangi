@@ -99,7 +99,7 @@ app.post("/fortuneTell", async function (req, res) {
     try {
       completion = await openai.chat.completions.create({
         messages: messages,
-        model: "gpt-3.5-turbo",
+        model: "gpt-4o-mini",
       });
       break;
     } catch (error) {
