@@ -23,7 +23,10 @@ const app = express();
 // cors 미들웨어 사용
 app.use(
   cors({
-    origin: "https://chatnyangi-jaekuky.pages.dev", // 프론트엔드 도메인 허용
+    origin: [
+      "https://chatnyangi-jaekuky.pages.dev",
+      "https://fortune-nyangi.kr",
+    ], // 프론트엔드 도메인 허용
     credentials: true,
   })
 );
