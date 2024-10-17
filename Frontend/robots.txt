@@ -1,0 +1,3 @@
+User-agent: *
+Allow:/
+Sitemap: https://fortune-nyangi.kr/sitemap.xml
