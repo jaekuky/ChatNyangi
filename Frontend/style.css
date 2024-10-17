@@ -33,6 +33,9 @@ body {
   font-size: 2.5rem; /* 크기 증가 */
   margin-bottom: 15px;
 }
+.intro-container h2 {
+  font-size: 2rem;
+}
 .img-box {
   margin-bottom: 15px;
 }
@@ -205,6 +208,10 @@ body {
     font-size: 2rem; /* Decrease heading font size */
   }
 
+  .intro-container h2 {
+    font-size: 1.5rem; /* Decrease heading font size */
+  }
+
   /* Adjust input and button sizes */
   .intro-container input,
   .intro-container button {
@@ -275,6 +282,10 @@ body {
 
   .intro-container h1 {
     font-size: 2rem; /* Decrease heading font size */
+  }
+
+  .intro-container h2 {
+    font-size: 1.5rem; /* Decrease heading font size */
   }
 
   /* Adjust input and button sizes */
