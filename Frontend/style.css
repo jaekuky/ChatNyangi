@@ -21,8 +21,22 @@ body {
   align-items: center; /* 수평 위치를 중앙으로 정렬 */
 }
 
+.header {
+  margin-top: 10px;
+  display: flex;
+  justify-content: right;
+  align-items: center;
+}
+.header #language-label {
+  margin-right: 15px;
+}
+.header #language {
+  padding: 5px;
+  width: 120px;
+}
+
 .intro-container {
-  margin-top: 30px;
+  margin-top: 20px;
   text-align: center;
   display: flex;
   flex-direction: column;

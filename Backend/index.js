@@ -106,8 +106,17 @@ app.post("/fortuneTell", async function (req, res) {
       retries++;
       console.error("Error fetching data, retrying (${retries}/${maxRetries}");
       console.error("Error calling OpenAI API:", error);
-      res.status(500).json({ error: "Failed to get response from OpenAI API" });
+      if (retries >= maxRetries) {
+        console.error("Max retries reached:", error);
+        return res
+          .status(500)
+          .json({ error: "Failed to get a response from OpenAI API" });
+      }
     }
+  }
+
+  if (!completion || !completion.choices) {
+    return res.status(500).json({ error: "Invalid response from OpenAI API" });
   }
 
   let fortune = completion.choices[0].message["content"];
