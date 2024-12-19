@@ -2,7 +2,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-size: 20px; /*글꼴 크기 증가*/
+  font-size: 20px; /*기본 글꼴 크기*/
 }
 
 body {
@@ -12,7 +12,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  height: 100vh; /* Ensure body covers full viewport height */
+  min-height: 100vh; /* Fixed typo to ensure proper viewport height */
 }
 
 .container {
@@ -44,7 +44,7 @@ body {
   align-items: center;
 }
 .intro-container h1 {
-  font-size: 2.5rem; /* 크기 증가 */
+  font-size: 2.5rem; /* 기본 헤더 크기 */
   margin-bottom: 15px;
 }
 .intro-container h2 {
@@ -89,8 +89,10 @@ body {
 
 .chat-container {
   margin-top: 50px;
-  width: 900px; /* 크기 증가 */
-  height: 600px; /* 크기 증가 */
+  width: 90%; /* Changed to a percentage for responsive design */
+  max-width: 900px; /* Limit maximum width */
+  height: auto; /* Let height adjust dynamically */
+  min-height: 600px; /* Ensure minimum height for larger devices */
   background-color: #fff;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -100,7 +102,7 @@ body {
 }
 .messages {
   /*height: 460px; */
-  height: 77%; /* 크기 증가 */
+  height: 70%; /* Adjusted height for better flexibility */
   min-height: 300px;
   flex: 1;
   padding: 20px;
@@ -181,15 +183,10 @@ body {
 
 /* Responsive design */
 /* Responsive design for screen widths less than 400px */
-
-/* Reduce font sizes for better fit */
-* {
-  font-size: 18px; /* Decrease global font size */
-}
-
-@media screen and (max-width: 400px) {
-  body {
-    min-height: auto; /* Allow body height to adjust */
+@media screen and (max-width: 400px), screen and (max-height: 700px) {
+  /* Reduce font sizes for better fit */
+  * {
+    font-size: 18px; /* Decrease global font size */
   }
 
   .container {
@@ -202,7 +199,6 @@ body {
 
   .chat-container {
     width: 100%; /* Adjust width to 100% for small screens */
-    height: auto; /* Let chat-container adjust its height */
     max-height: 500px; /* Set a maximum height */
     margin-top: 20px; /* Adjust margin-top */
     border-radius: 0; /* Remove border-radius for a cleaner look */
@@ -245,7 +241,6 @@ body {
 @media screen and (max-width: 900px) {
   .chat-container {
     width: 100%; /* Adjust width to 100% for smaller screens */
-    /* height: 100%; */
     border-radius: 0; /* Remove border-radius for a cleaner look */
   }
 
@@ -254,66 +249,5 @@ body {
   }
   .messages {
     height: 90% - 30px; /* Adjust height for smaller screens */
-  }
-}
-
-/* Responsive design for screen heights less than 700px */
-/* Reduce font sizes for better fit */
-* {
-  font-size: 18px; /* Decrease global font size */
-}
-
-@media screen and (max-height: 700px) {
-  body {
-    min-height: auto; /* Allow body height to adjust */
-  }
-
-  .container {
-    margin-top: 10px; /* Reduce top margin */
-  }
-
-  .intro-container {
-    margin-top: 10px; /* Reduce top margin */
-  }
-
-  .chat-container {
-    width: 100%; /* Adjust width to 100% for small screens */
-    height: auto; /* Let chat-container adjust its height */
-    max-height: 500px; /* Set a maximum height */
-    margin-top: 20px; /* Adjust margin-top */
-    border-radius: 0; /* Remove border-radius for a cleaner look */
-  }
-
-  .messages {
-    max-height: 300px; /* Limit messages container height */
-    overflow-y: auto;
-  }
-
-  .img-box img {
-    width: 50%; /* Reduce image width */
-    min-width: 200px; /* Ensure minimum width */
-  }
-
-  .intro-container h1 {
-    font-size: 2rem; /* Decrease heading font size */
-  }
-
-  .intro-container h2 {
-    font-size: 1.5rem; /* Decrease heading font size */
-  }
-
-  /* Adjust input and button sizes */
-  .intro-container input,
-  .intro-container button {
-    padding: 8px; /* Reduce padding */
-  }
-
-  .input-container {
-    padding: 10px; /* Reduce padding */
-  }
-
-  .kakao-ad {
-    margin-top: 10px; /* Adjust ad margin */
-    min-height: 100px; /* Reduce ad minimum height */
   }
 }
