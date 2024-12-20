@@ -79,6 +79,19 @@ const errorMessage = {
   zh: "运势加载失败。请稍后再试。",
 };
 
+// Added translations for "모름" (unknown)
+const hourUnknownTranslation = {
+  de: "Unbekannt",
+  en: "Unknown",
+  es: "Desconocido",
+  fr: "Inconnu",
+  it: "Sconosciuto",
+  ja: "不明",
+  ko: "모름",
+  ru: "Неизвестно",
+  zh: "未知",
+};
+
 // 언어 설정 함수
 document
   .getElementById("language")
@@ -178,6 +191,10 @@ document
         messageRequestButton.textContent = "问一个问题";
         break;
     }
+
+    // '태어난 시간' 선택 객체 (id: hour) 다국어 지원
+    const hourUnknownOption = document.getElementById("hour-unknown");
+    hourUnknownOption.textContent = hourUnknownTranslation[selectedLanguage];
   });
 
 // 사용자가 입력한 생년월일, 태어난 시간을 가져오는 함수
