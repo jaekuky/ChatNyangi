@@ -92,6 +92,97 @@ const hourUnknownTranslation = {
   zh: "未知",
 };
 
+// mainTitle Text
+const mainTitleText = {
+  de: "Wir verraten Ihnen Ihr Schicksal",
+  en: "I'll tell you your fortune",
+  es: "Te diremos tu fortuna",
+  fr: "Nous vous dirons votre fortune",
+  it: "Ti diremo la fortuna",
+  ja: "をお知らせします",
+  ko: "운세를 알려드립니다",
+  ru: "Мы предскажем вам вашу судьбу",
+  zh: "我们会告诉你你的命运",
+};
+
+// subTitle Text
+const subTitleText = {
+  de: "Fragen Sie ChatNyangi!",
+  en: "Ask Chatnyangi",
+  es: "¡Pregunta a ChatNyangi!",
+  fr: "Demandez à ChatNyangi!",
+  it: "Chiedi a ChatNyangi!",
+  ja: "ChatNyangiに聞いてみて！",
+  ko: "챗냥이에게 물어보세요!",
+  ru: "Спросите у ChatNyangi!",
+  zh: "问问ChatNyangi吧！",
+};
+
+// dateLabel Text
+const dateLabelText = {
+  de: "Geburtsdatum",
+  en: "Date of birth",
+  es: "Fecha de nacimiento",
+  fr: "Date de naissance",
+  it: "Data di nascita",
+  ja: "生年月日",
+  ko: "생년월일",
+  ru: "Дата рождения",
+  zh: "出生日期",
+};
+
+// hourLable Text
+const hourLableText = {
+  de: "Geburtszeit",
+  en: "Time of birth",
+  es: "Hora de nacimiento",
+  fr: "Heure de naissance",
+  it: "Orario di nascita",
+  ja: "生まれた時間",
+  ko: "태어난 시간",
+  ru: "Время рождения",
+  zh: "出生时间",
+};
+
+// viewFortuneButton Text
+const viewFortuneButtonText = {
+  de: "Finden Sie Ihr Horoskop für heute heraus",
+  en: "Find out your fortune for today",
+  es: "Conoce tu horóscopo de hoy",
+  fr: "Découvrez votre horoscope du jour",
+  it: "Scopri il tuo oroscopo di oggi",
+  ja: "今日の占いを学ぶ",
+  ko: "오늘의 운세 보기",
+  ru: "Узнайте свой гороскоп на сегодня",
+  zh: "找出你今天的星座运势",
+};
+
+// messageInput placeholder
+const messageInputPlaceholder = {
+  de: "Fragen Sie ChatNyangi!",
+  en: "Ask Chatnyangi!",
+  es: "¡Pregunta a ChatNyangi!",
+  fr: "Demandez à ChatNyangi!",
+  it: "Chiedi a ChatNyangi!",
+  ja: "ChatNyangiに聞いてみて！",
+  ko: "챗냥이에게 물어보세요!",
+  ru: "Спросите у ChatNyangi!",
+  zh: "问问ChatNyangi吧！",
+};
+
+// messageRequestButton Text
+const messageRequestButtonText = {
+  de: "Eine Frage stellen",
+  en: "Ask a question",
+  es: "Hacer una pregunta",
+  fr: "Poser une question",
+  it: "Fai una domanda",
+  ja: "質問する",
+  ko: "물어보기",
+  ru: "Задать вопрос",
+  zh: "问一个问题",
+};
+
 // 언어 설정 함수
 document
   .getElementById("language")
@@ -99,98 +190,15 @@ document
     event.preventDefault();
 
     const selectedLanguage = languageSelect.value;
-    switch (selectedLanguage) {
-      case "de":
-        mainTitle.textContent = "Wir verraten Ihnen Ihr Schicksal";
-        subTitle.textContent = "Fragen Sie ChatNyangi!";
-        dateLabel.textContent = "Geburtsdatum";
-        hourLabel.textContent = "Geburtszeit";
-        viewFortuneButton.textContent =
-          "Finden Sie Ihr Horoskop für heute heraus";
-        messageInput.placeholder = "Fragen Sie ChatNyangi!";
-        messageRequestButton.textContent = "Eine Frage stellen";
-        break;
-
-      case "en":
-        mainTitle.textContent = "I'll tell you your fortune";
-        subTitle.textContent = "Ask Chatnyangi";
-        dateLabel.textContent = "Date of birth";
-        hourLabel.textContent = "Time of birth";
-        viewFortuneButton.textContent = "Find out your fortune for today";
-        messageInput.placeholder = "Ask Chatnyangi!";
-        messageRequestButton.textContent = "Ask a question";
-        break;
-
-      case "es":
-        mainTitle.textContent = "Te diremos tu fortuna.";
-        subTitle.textContent = "¡Pregunta a ChatNyangi!";
-        dateLabel.textContent = "Fecha de nacimiento";
-        hourLabel.textContent = "Hora de nacimiento";
-        viewFortuneButton.textContent = "Conoce tu horóscopo de hoy";
-        messageInput.placeholder = "¡Pregunta a ChatNyangi!";
-        messageRequestButton.textContent = "Hacer una pregunta";
-        break;
-
-      case "fr":
-        mainTitle.textContent = "Nous vous dirons votre fortune";
-        subTitle.textContent = "Demandez à ChatNyangi!";
-        dateLabel.textContent = "Date de naissance";
-        hourLabel.textContent = "Heure de naissance";
-        viewFortuneButton.textContent = "Découvrez votre horoscope du jour";
-        messageInput.placeholder = "Demandez à ChatNyangi!";
-        messageRequestButton.textContent = "Poser une question";
-        break;
-
-      case "it":
-        mainTitle.textContent = "Ti diremo la fortuna";
-        subTitle.textContent = "Chiedi a ChatNyangi!";
-        dateLabel.textContent = "Data di nascita";
-        hourLabel.textContent = "Orario di nascita";
-        viewFortuneButton.textContent = "Scopri il tuo oroscopo di oggi";
-        messageInput.placeholder = "Chiedi a ChatNyangi!";
-        messageRequestButton.textContent = "Fai una domanda";
-        break;
-
-      case "ja":
-        mainTitle.textContent = "占いをお知らせします";
-        subTitle.textContent = "ChatNyangiに聞いてみて！";
-        dateLabel.textContent = "生年月日";
-        hourLabel.textContent = "生まれた時間";
-        viewFortuneButton.textContent = "今日の占いを学ぶ";
-        messageInput.placeholder = "ChatNyangiに聞いてみて！";
-        messageRequestButton.textContent = "質問する";
-        break;
-
-      case "ko":
-        mainTitle.textContent = "운세를 알려드립니다";
-        subTitle.textContent = "챗냥이에게 물어보세요!";
-        dateLabel.textContent = "생년월일";
-        hourLabel.textContent = "태어난 시간";
-        viewFortuneButton.textContent = "오늘의 운세 보기";
-        messageInput.placeholder = "챗냥이에게 물어보세요!";
-        messageRequestButton.textContent = "물어보기";
-        break;
-
-      case "ru":
-        mainTitle.textContent = "Мы предскажем вам вашу судьбу";
-        subTitle.textContent = "Спросите у ChatNyangi!";
-        dateLabel.textContent = "Дата рождения";
-        hourLabel.textContent = "Время рождения";
-        viewFortuneButton.textContent = "Узнайте свой гороскоп на сегодня";
-        messageInput.placeholder = "Спросите у ChatNyangi!";
-        messageRequestButton.textContent = "Задать вопрос";
-        break;
-
-      case "zh":
-        mainTitle.textContent = "我们会告诉你你的命运";
-        subTitle.textContent = "问问ChatNyangi吧！";
-        dateLabel.textContent = "出生日期";
-        hourLabel.textContent = "出生时间";
-        viewFortuneButton.textContent = "找出你今天的星座运势";
-        messageInput.placeholder = "问问ChatNyangi吧！";
-        messageRequestButton.textContent = "问一个问题";
-        break;
-    }
+    // 화면 객체 다국어 지원
+    mainTitle.textContent = mainTitleText[selectedLanguage];
+    subTitle.textContent = subTitleText[selectedLanguage];
+    dateLabel.textContent = dateLabelText[selectedLanguage];
+    hourLabel.textContent = hourLableText[selectedLanguage];
+    viewFortuneButton.textContent = viewFortuneButtonText[selectedLanguage];
+    messageInput.placeholder = messageInputPlaceholder[selectedLanguage];
+    messageRequestButton.textContent =
+      messageRequestButtonText[selectedLanguage];
 
     // '태어난 시간' 선택 객체 (id: hour) 다국어 지원
     const hourUnknownOption = document.getElementById("hour-unknown");
