@@ -104,9 +104,9 @@ app.post("/fortuneTell", async function (req, res) {
       break;
     } catch (error) {
       retries++;
-      console.error("Error fetching data, retrying (${retries}/${maxRetries}");
+      console.error(`Error fetching data, retrying ${retries}/${maxRetries}`);
       console.error("Error calling OpenAI API:", error);
-      if (retries >= maxRetries) {
+      if (retries === maxRetries) {
         console.error("Max retries reached:", error);
         return res
           .status(500)
