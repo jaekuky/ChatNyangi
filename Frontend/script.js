@@ -183,6 +183,19 @@ const messageRequestButtonText = {
   zh: "问一个问题",
 };
 
+// Language translations for SEO-related content
+const pageTitleText = {
+  ko: "운세 보는 챗냥이 - ChatGPT 인공지능 운세 확인",
+  en: "ChatNyangi - AI Fortune Telling",
+  de: "ChatNyangi - Wahrsagen mit KI",
+  es: "ChatNyangi - Adivinación con IA",
+  fr: "ChatNyangi - Prédiction avec l'IA",
+  it: "ChatNyangi - Predizione con AI",
+  ja: "ChatNyangi - AI運勢占い",
+  ru: "ChatNyangi - Гадание с ИИ",
+  zh: "ChatNyangi - AI算命",
+};
+
 // 언어 설정 함수
 document
   .getElementById("language")
@@ -190,6 +203,21 @@ document
     event.preventDefault();
 
     const selectedLanguage = languageSelect.value;
+
+    // Dynamically update title
+    document.title = pageTitleText[selectedLanguage];
+
+    // Update meta description dynamically
+    const metaDescription = document.querySelector('meta[name="description"]');
+    metaDescription.setAttribute(
+      "content",
+      pageMetaDescription[selectedLanguage]
+    );
+
+    // Update keywords dynamically
+    const metaKeywords = document.querySelector('meta[name="keywords"]');
+    metaKeywords.setAttribute("content", pageMetaKeywords[selectedLanguage]);
+
     // 화면 객체 다국어 지원
     mainTitle.textContent = mainTitleText[selectedLanguage];
     subTitle.textContent = subTitleText[selectedLanguage];

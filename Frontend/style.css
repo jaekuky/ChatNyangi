@@ -197,6 +197,15 @@ body {
     margin-top: 10px; /* Reduce top margin */
   }
 
+  .intro-container input,
+  .intro-container button {
+    padding: 8px; /* Reduced padding for smaller screens */
+  }
+
+  .img-box img {
+    width: 50%; /* Adjusted image size */
+  }
+
   .chat-container {
     width: 100%; /* Adjust width to 100% for small screens */
     max-height: 500px; /* Set a maximum height */
