@@ -207,17 +207,6 @@ document
     // Dynamically update title
     document.title = pageTitleText[selectedLanguage];
 
-    // Update meta description dynamically
-    const metaDescription = document.querySelector('meta[name="description"]');
-    metaDescription.setAttribute(
-      "content",
-      pageMetaDescription[selectedLanguage]
-    );
-
-    // Update keywords dynamically
-    const metaKeywords = document.querySelector('meta[name="keywords"]');
-    metaKeywords.setAttribute("content", pageMetaKeywords[selectedLanguage]);
-
     // 화면 객체 다국어 지원
     mainTitle.textContent = mainTitleText[selectedLanguage];
     subTitle.textContent = subTitleText[selectedLanguage];
