@@ -10,8 +10,9 @@ body {
   color: #fff; /* Text color */
   font-family: Arial, sans-serif;
   display: flex;
+  flex-direction: column; /* 객체 배치를 세로로 설정  */
   justify-content: center;
-  align-items: flex-start;
+  align-items: center; /* 가로 위치 가운데 정렬*/
   min-height: 100vh; /* Fixed typo to ensure proper viewport height */
 }
 
@@ -181,6 +182,35 @@ body {
   min-height: 150px;
 }
 
+/* Footer styling added to support newly created footer in HTML */
+.footer {
+  width: 100%;
+  text-align: center;
+  padding: 20px 10px;
+  margin-top: 30px; /* Adds space above the footer */
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  background-color: rgb(24, 25, 55);
+  color: #ffffff;
+  font-size: 0.5rem;
+}
+
+.footer .privacy-page-link,
+.footer .mail-address {
+  margin-left: 50px;
+  margin-left: 50px;
+  color: #ffffff; /* White color for better readability */
+  text-decoration: none;
+}
+
+.footer .privacy-page-link:hover {
+  text-decoration: underline; /* Adds interactivity on hover */
+}
+.footer .mail-address:hover {
+  text-decoration: underline; /* Adds interactivity on hover */
+}
+
 /* Responsive design */
 /* Responsive design for screen widths less than 400px */
 @media screen and (max-width: 400px), screen and (max-height: 700px) {
@@ -244,6 +274,11 @@ body {
   .kakao-ad {
     margin-top: 10px; /* Adjust ad margin */
     min-height: 100px; /* Reduce ad minimum height */
+  }
+
+  .footer {
+    padding: 15px 5px; /* Reduced padding for compact screens */
+    font-size: 0.8rem; /* Slightly smaller font size for small screens */
   }
 }
 
