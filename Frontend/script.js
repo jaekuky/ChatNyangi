@@ -273,8 +273,10 @@ async function sendFortuneRequest() {
     const data = await response.json();
     return data;
   } catch (error) {
+    // console.error("There was a problem with the fetch operation:", error);
+    // throw new Error("Network response was not ok " + response.statusText);
     console.error("There was a problem with the fetch operation:", error);
-    throw new Error("Network response was not ok " + response.statusText);
+    throw error;
   }
 }
 

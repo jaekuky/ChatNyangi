@@ -27,9 +27,14 @@ app.use(
       "https://chatnyangi-jaekuky.pages.dev",
       "https://fortune-nyangi.kr",
     ], // 프론트엔드 도메인 허용
+    methods: ["POST", "OPTIONS"],
+    allowedHeaders: ["Content-Type"],
     credentials: true,
   })
 );
+
+// 프리플라이트 OPTIONS 요청을 명시적으로 처리
+app.options("/fortuneTell", cors());
 
 // POST 요청을 받을 수 있게 만듦
 app.use(express.json()); // for parsing application/json
